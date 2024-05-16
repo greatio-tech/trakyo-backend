@@ -1,0 +1,15 @@
+{
+  "name": "trakyo-backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com-personal:greatio-tech/trakyo-backend.git"
+  },
+  "author": "",
+  "license": "ISC"
+}
