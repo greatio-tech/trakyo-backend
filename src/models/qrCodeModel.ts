@@ -17,6 +17,7 @@ const qrCodeSchema = new mongoose.Schema({
     year: Number,
     licensePlate: String,
   },
+  images: [String],
 }, { timestamps: true });
 
 const QRCode = mongoose.model('QRCode', qrCodeSchema);

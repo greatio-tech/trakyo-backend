@@ -7,5 +7,6 @@ export interface IQRCode {
       year: number;
       licensePlate: string;
     };
+    images?: string[];
   }
   
