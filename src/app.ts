@@ -7,7 +7,14 @@ import authRoutes from './routes/authRoutes';
 import userRoutes from './routes/userRoutes';
 import qrCodeRoutes from './routes/qrCodeRoutes';
 import adminRoutes from './routes/adminRoutes';
+import vehicleRoutes from './routes/vehicleRoutes';
+import supportRoutes from './routes/supportRoutes';
+import settingsRoutes from './routes/settingsRoutes';
 import errorMiddleware from './middlewares/errorMiddleware';
+// import alertRoutes from './routes/alertRoutes';
+import listingRoutes from './routes/listingRoutes';
+
+
 
 dotenv.config();
 
@@ -22,6 +29,11 @@ app.use('/api/auth', authRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/qrcodes', qrCodeRoutes);
 app.use('/api/admin', adminRoutes);
+app.use('/api/vehicles', vehicleRoutes);
+app.use('/api/support', supportRoutes);
+app.use('/api/settings', settingsRoutes);
+// app.use('/api/alert', alertRoutes);
+app.use('/api/list', listingRoutes);
 
 app.use(errorMiddleware);
 

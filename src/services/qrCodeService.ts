@@ -23,3 +23,11 @@ export const updateQRCodeDetails = async (code: string, qrCodeDetails: Partial<I
   }
   return qrCode;
 };
+
+export const scanQRCode = async (code: string) => {
+  const qrCode = await QRCode.findOne({ code }).populate('owner');
+  if (!qrCode) {
+    throw new Error('QR Code not found');
+  }
+  return qrCode;
+};

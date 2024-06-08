@@ -3,6 +3,7 @@ export interface IUser {
     name?: string;
     email?: string;
     dob?: Date;
+    id:number;
     emergencyContacts?: Array<{
       name: string;
       phoneNumber: string;
