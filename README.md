@@ -52,9 +52,9 @@ This is the backend API for a mobile application that allows users to contact ve
 - POST /api/admin/generate-codes: Generate multiple QR codes.
 - GET /api/admin/users: Get list of all users.
 
-## User Registration
+<!-- ## User Registration -->
 
-- POST /api/auth/register: Register a new user.
+<!-- - POST /api/auth/register: Register a new user. -->
 
 ## Vehicle Management
 
