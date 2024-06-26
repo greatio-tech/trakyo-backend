@@ -15,3 +15,12 @@ export const sendOtp = (phoneNumber: string, otp: string) => {
     to: phoneNumber,
   });
 };
+
+
+export const makeCall = (from: string, to: string, url: string) => {
+  return client.calls.create({
+    url,
+    to,
+    from,
+  });
+};

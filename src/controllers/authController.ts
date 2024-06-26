@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { loginWithOtp, verifyOtp } from '../services/authService';
+import { loginWithOtp, resendOtp, verifyOtp } from '../services/authService';
 
 export const login = async (req: Request, res: Response) => {
   const { phoneNumber } = req.body;
@@ -11,12 +11,34 @@ export const login = async (req: Request, res: Response) => {
   }
 };
 
+
+
+// export const verify = async (req: Request, res: Response) => {
+//   const { phoneNumber, otp, token } = req.body;
+//   try {
+//     const { user, token: userToken } = await verifyOtp(phoneNumber, otp, token);
+//     res.json({ user, token: userToken });
+//   } catch (error:any) {
+//     res.status(400).json({ message: error.message });
+//   }
+// };
 export const verify = async (req: Request, res: Response) => {
   const { phoneNumber, otp, token } = req.body;
   try {
-    const { user, token: userToken } = await verifyOtp(phoneNumber, otp, token);
-    res.json({ user, token: userToken });
+    const { user, token: userToken, userExists } = await verifyOtp(phoneNumber, otp, token);
+    res.json({ user, token: userToken, userExists });
   } catch (error:any) {
     res.status(400).json({ message: error.message });
+  }
+};
+
+export const resend = async (req: Request, res: Response) => {
+  const { phoneNumber } = req.body;
+  try {
+    const token = await resendOtp(phoneNumber);
+    res.json({ token });
+  } catch (error:any) {
+    console.log(error);
+    res.status(500).json({ message: error.message });
   }
 };

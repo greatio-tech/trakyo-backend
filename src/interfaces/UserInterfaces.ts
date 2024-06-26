@@ -3,6 +3,7 @@ export interface IUser {
     name?: string;
     email?: string;
     dob?: Date;
+    profilePicture?: string;
     id:number;
     emergencyContacts?: Array<{
       name: string;

@@ -13,6 +13,9 @@ import settingsRoutes from './routes/settingsRoutes';
 import errorMiddleware from './middlewares/errorMiddleware';
 // import alertRoutes from './routes/alertRoutes';
 import listingRoutes from './routes/listingRoutes';
+import orderRoutes from './routes/orderRoutes';
+import callRoutes from './routes/callRoutes';
+import uploadRoutes from './routes/uploadRoutes';
 
 
 
@@ -34,6 +37,9 @@ app.use('/api/support', supportRoutes);
 app.use('/api/settings', settingsRoutes);
 // app.use('/api/alert', alertRoutes);
 app.use('/api/list', listingRoutes);
+app.use('/api/orders', orderRoutes);
+app.use('/api/calls', callRoutes);
+app.use('/api/uploads', uploadRoutes);
 
 app.use(errorMiddleware);
 
