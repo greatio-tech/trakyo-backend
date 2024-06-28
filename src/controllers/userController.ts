@@ -58,6 +58,19 @@ export const updateUser = async (req: Request, res: Response, next: NextFunction
   }
 };
 
+
+// export const updateUser = async (req: Request, res: Response) => {
+//   try {
+//     const userId = req.params.id;
+//     const userDetails = req.body;
+//     const file = req.file;
+//     const user = await updateUserDetails(userId, userDetails, file);
+//     res.json(user);
+//   } catch (error) {
+//     res.status(404).json({ message: error.message });
+//   }
+// };
+
 export const addContact = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const userId = req.params.id;

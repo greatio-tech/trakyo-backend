@@ -32,8 +32,10 @@ const userSchema = new mongoose.Schema({
     lowercase: false
   },
   dob: Date,
-  profilePicture: String,
-  emergencyContacts: [{
+  profilePicture: {
+    type: String,
+    default: '',
+  },  emergencyContacts: [{
     name: String,
     phoneNumber: String,
   }],

@@ -4,6 +4,8 @@ import User from '../models/userModel';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
+import QRCodeLib from 'qrcode';
+
 import { IUser } from '../interfaces/UserInterfaces';
 
 dotenv.config();
@@ -24,11 +26,27 @@ export const loginAdmin = async (email: string, password: string) => {
   return token;
 };
 
-export const generateQRCodes = async (count: number, owner: string) => {
+// export const generateQRCodes = async (count: number, owner: string) => {
+//   const qrCodes = [];
+//   for (let i = 0; i < count; i++) {
+//     const code = `QR${Date.now()}${i}`;
+//     const qrCode = new QRCode({ code, owner });
+//     await qrCode.save();
+//     qrCodes.push(qrCode);
+//   }
+//   return qrCodes;
+// };
+export const generatePredesignedQRCodes = async (count: number) => {
   const qrCodes = [];
   for (let i = 0; i < count; i++) {
     const code = `QR${Date.now()}${i}`;
-    const qrCode = new QRCode({ code, owner });
+    const qrCodeData = await QRCodeLib.toDataURL(code); 
+    const qrCode = new QRCode({
+      code,
+      qrCodeData,  
+      owner: null, 
+      vehicleDetails: {}, 
+    });
     await qrCode.save();
     qrCodes.push(qrCode);
   }

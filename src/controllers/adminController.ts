@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { createAdmin, loginAdmin, generateQRCodes, manageUsers, approveUserDetailsChange } from '../services/adminService';
+import { createAdmin, loginAdmin, manageUsers, approveUserDetailsChange, generatePredesignedQRCodes } from '../services/adminService';
 
 export const registerAdmin = async (req: Request, res: Response) => {
   try {
@@ -21,10 +21,19 @@ export const login = async (req: Request, res: Response) => {
   }
 };
 
+// export const generateCodes = async (req: Request, res: Response) => {
+//   try {
+//     const { count, owner } = req.body;
+//     const qrCodes = await generateQRCodes(count, owner);
+//     res.json(qrCodes);
+//   } catch (error:any) {
+//     res.status(500).json({ message: error.message });
+//   }
+// };
 export const generateCodes = async (req: Request, res: Response) => {
   try {
-    const { count, owner } = req.body;
-    const qrCodes = await generateQRCodes(count, owner);
+    const { count } = req.body;
+    const qrCodes = await generatePredesignedQRCodes(count);
     res.json(qrCodes);
   } catch (error:any) {
     res.status(500).json({ message: error.message });

@@ -24,3 +24,26 @@ export const makeCall = (from: string, to: string, url: string) => {
     from,
   });
 };
+
+// export const sendSms = (phoneNumber: string, message: string) => {
+//   return client.messages.create({
+//     body: message,
+//     from: process.env.TWILIO_PHONE_NUMBER,
+//     to: phoneNumber,
+//   });
+// };
+
+export const sendSms = (phoneNumber: string, message: string) => {
+  if (!phoneNumber) {
+    throw new Error('Phone number is required');
+  }
+  if (!message) {
+    throw new Error('Message is required');
+  }
+  
+  return client.messages.create({
+    body: message,
+    from: process.env.TWILIO_PHONE_NUMBER,
+    to: phoneNumber,
+  });
+};
