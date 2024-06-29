@@ -39,6 +39,10 @@ const userSchema = new mongoose.Schema({
     name: String,
     phoneNumber: String,
   }],
+  refreshToken: {
+    type: String,
+    default: '',
+  },
 }, { timestamps: true });
 
 const User = mongoose.model('User', userSchema);

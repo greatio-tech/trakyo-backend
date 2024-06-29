@@ -6,23 +6,28 @@
 //     ref: 'User',
 //     required: true,
 //   },
-//   status: {
-//     type: String,
-//     enum: ['Pending', 'Processing', 'Shipped', 'Delivered', 'Cancelled'],
-//     default: 'Pending',
-//   },
-//   qrCodes: [{
-//     type: mongoose.Schema.Types.ObjectId,
-//     ref: 'QRCode',
-//   }],
-//   totalAmount: {
+//   amount: {
 //     type: Number,
 //     required: true,
 //   },
-//   paymentStatus: {
+//   currency: {
 //     type: String,
-//     enum: ['Pending', 'Completed', 'Failed'],
-//     default: 'Pending',
+//     required: true,
+//     default: 'INR',
+//   },
+//   receipt: {
+//     type: String,
+//     required: true,
+//   },
+//   status: {
+//     type: String,
+//     required: true,
+//     enum: ['created', 'paid', 'failed'],
+//     default: 'created',
+//   },
+//   paymentId: {
+//     type: String,
+//     required: false,
 //   },
 // }, { timestamps: true });
 
@@ -39,6 +44,11 @@ const orderSchema = new mongoose.Schema({
     ref: 'User',
     required: true,
   },
+  qrCodes: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'QRCode',
+    required: true,
+  }],
   amount: {
     type: Number,
     required: true,
@@ -52,18 +62,26 @@ const orderSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  paymentId: {
+    type: String,
+    required: false,
+  },
   status: {
     type: String,
     required: true,
     enum: ['created', 'paid', 'failed'],
     default: 'created',
   },
-  paymentId: {
+  deliveryStatus: {
     type: String,
-    required: false,
+    required: true,
+    enum: ['pending', 'processing', 'shipped', 'delivered'],
+    default: 'pending',
   },
 }, { timestamps: true });
 
 const Order = mongoose.model('Order', orderSchema);
 
 export default Order;
+
+
