@@ -28,6 +28,11 @@ app.use(bodyParser.json());
 
 connectDB();
 
+app.use((req, res, next) => {
+  console.log(`${req.method} ${req.url}`);
+  next();
+});
+
 app.use('/api/auth', authRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/qrcodes', qrCodeRoutes);

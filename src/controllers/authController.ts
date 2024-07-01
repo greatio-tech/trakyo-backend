@@ -11,22 +11,11 @@ export const login = async (req: Request, res: Response) => {
   }
 };
 
-
-
 // export const verify = async (req: Request, res: Response) => {
 //   const { phoneNumber, otp, token } = req.body;
 //   try {
-//     const { user, token: userToken } = await verifyOtp(phoneNumber, otp, token);
-//     res.json({ user, token: userToken });
-//   } catch (error:any) {
-//     res.status(400).json({ message: error.message });
-//   }
-// };
-// export const verify = async (req: Request, res: Response) => {
-//   const { phoneNumber, otp, token } = req.body;
-//   try {
-//     const { user, token: userToken, userExists } = await verifyOtp(phoneNumber, otp, token);
-//     res.json({ user, token: userToken, userExists });
+//     const { user, accessToken, refreshToken, userExists } = await verifyOtp(phoneNumber, otp, token);
+//     res.json({ user, accessToken, refreshToken, userExists });
 //   } catch (error:any) {
 //     res.status(400).json({ message: error.message });
 //   }
@@ -37,9 +26,14 @@ export const verify = async (req: Request, res: Response) => {
     const { user, accessToken, refreshToken, userExists } = await verifyOtp(phoneNumber, otp, token);
     res.json({ user, accessToken, refreshToken, userExists });
   } catch (error:any) {
-    res.status(400).json({ message: error.message });
+    if (error.message === 'Incorrect OTP') {
+      res.status(401).json({ message: 'Incorrect OTP' });
+    } else {
+      res.status(400).json({ message: error.message });
+    }
   }
 };
+
 
 export const resend = async (req: Request, res: Response) => {
   const { phoneNumber } = req.body;
