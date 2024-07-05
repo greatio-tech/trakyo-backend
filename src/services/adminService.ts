@@ -36,10 +36,27 @@ export const loginAdmin = async (email: string, password: string) => {
 //   }
 //   return qrCodes;
 // };
+// export const generatePredesignedQRCodes = async (count: number) => {
+//   const qrCodes = [];
+//   for (let i = 0; i < count; i++) {
+//     const code = `QR${Date.now()}${i}`;
+//     const qrCodeData = await QRCodeLib.toDataURL(code); 
+//     const qrCode = new QRCode({
+//       code,
+//       qrCodeData,  
+//       owner: null, 
+//       vehicleDetails: {}, 
+//     });
+//     await qrCode.save();
+//     qrCodes.push(qrCode);
+//   }
+//   return qrCodes;
+// };
 export const generatePredesignedQRCodes = async (count: number) => {
   const qrCodes = [];
+  const baseUrl = "https://trakyo.netlify.app?/"
   for (let i = 0; i < count; i++) {
-    const code = `QR${Date.now()}${i}`;
+    const code = `${baseUrl}QR${Date.now()}${i}`;
     const qrCodeData = await QRCodeLib.toDataURL(code); 
     const qrCode = new QRCode({
       code,
@@ -52,7 +69,6 @@ export const generatePredesignedQRCodes = async (count: number) => {
   }
   return qrCodes;
 };
-
 export const manageUsers = async () => {
   const users = await User.find();
   return users;
