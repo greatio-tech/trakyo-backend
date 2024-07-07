@@ -32,6 +32,10 @@ const qrCodeSchema = new mongoose.Schema({
     required: true,
     unique: true,
   },
+  baseUrl:{
+    type: String,
+    required: true,
+  },
   owner: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',

@@ -63,11 +63,22 @@ export const uploadImage = async (req: Request, res: Response) => {
 //   }
 // };
 
-export const scanCode = async (req: Request, res: Response) => {
+// export const scanCode = async (req: Request, res: Response) => {
+//   try {
+//     const code = req.params.code;
+//     const { vehicleDetails, userId } = req.body;
+//     const qrCode = await scanQRCode(code, vehicleDetails, userId);
+//     res.json(qrCode);
+//   } catch (error:any) {
+//     res.status(404).json({ message: error.message });
+//   }
+// };
+
+export const  scanCode = async (req: Request, res: Response) => {
   try {
-    const code = req.params.code;
-    const { vehicleDetails, userId } = req.body;
-    const qrCode = await scanQRCode(code, vehicleDetails, userId);
+        const code = req.params.code;
+    const { vehicleId, userId } = req.body; 
+    const qrCode = await scanQRCode(vehicleId, userId,code); 
     res.json(qrCode);
   } catch (error:any) {
     res.status(404).json({ message: error.message });

@@ -54,12 +54,14 @@ export const loginAdmin = async (email: string, password: string) => {
 // };
 export const generatePredesignedQRCodes = async (count: number) => {
   const qrCodes = [];
-  const baseUrl = "https://trakyo.netlify.app?/"
+  const baseUrl = "https://trakyo.netlify.app?"
   for (let i = 0; i < count; i++) {
-    const code = `${baseUrl}QR${Date.now()}${i}`;
-    const qrCodeData = await QRCodeLib.toDataURL(code); 
+    // const code = `${baseUrl}QR${Date.now()}${i}`;
+    const code = `QR${Date.now()}${i}`;
+    const qrCodeData = await QRCodeLib.toDataURL(baseUrl+code); 
     const qrCode = new QRCode({
       code,
+      baseUrl,
       qrCodeData,  
       owner: null, 
       vehicleDetails: {}, 
