@@ -30,12 +30,22 @@ export const updateUserDetails = async (userId: string, userDetails: Partial<IUs
 //   return user;
 // };
 
-export const addEmergencyContact = async (userId: string, contact: { name: string, phoneNumber: string }) => {
+// export const addEmergencyContact = async (userId: string, contact: { name: string, phoneNumber: string }) => {
+//   const user = await User.findById(userId);
+//   if (!user) {
+//     throw new Error('User not found');
+//   }
+//   user.emergencyContacts.push(contact);
+//   await user.save();
+//   return user;
+// };
+
+export const addEmergencyContact = async (userId: string, contacts: Array<{ name: string, phoneNumber: string }>) => {
   const user = await User.findById(userId);
   if (!user) {
     throw new Error('User not found');
   }
-  user.emergencyContacts.push(contact);
+  user.emergencyContacts.push(...contacts); // Use spread operator to add all contacts at once
   await user.save();
   return user;
 };

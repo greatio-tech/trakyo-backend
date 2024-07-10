@@ -40,6 +40,11 @@ const vehicleSchema = new mongoose.Schema({
   model: String,
   year: Number,
   licensePlate: String,
+  qrCode: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'QRCode',
+    default: null,
+  },
 }, { timestamps: true });
 
 const Vehicle = mongoose.model('Vehicle', vehicleSchema);
