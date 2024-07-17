@@ -13,6 +13,10 @@ export const getQRCodeDetails = async (code: string) => {
   }
   return qrCode;
 };
+export const getQRCodesByUserId = async (userId: string) => {
+  const qrCodes = await QRCode.find({ owner: userId });
+  return qrCodes;
+};
 
 export const createQRCode = async (qrCodeDetails: IQRCode) => {
   const qrCode = new QRCode(qrCodeDetails);

@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { getQRCodeDetails, createQRCode, updateQRCodeDetails, scanQRCode } from '../services/qrCodeService';
+import { getQRCodeDetails, createQRCode, updateQRCodeDetails, scanQRCode, getQRCodesByUserId } from '../services/qrCodeService';
 // import cloudinary from '../config/cloudinary';
 import QRCode from '../models/qrCodeModel';
 import cloudinary from '../config/cloudinary';
@@ -11,6 +11,15 @@ export const getQRCode = async (req: Request, res: Response) => {
     res.json(qrCode);
   } catch (error:any) {
     res.status(404).json({ message: error.message });
+  }
+};
+export const fetchQRCodesByUser = async (req: Request, res: Response) => {
+  try {
+    const userId = req.params.userId;
+    const qrCodes = await getQRCodesByUserId(userId);
+    res.json(qrCodes);
+  } catch (error:any) {
+    res.status(500).json({ message: error.message });
   }
 };
 
