@@ -35,10 +35,11 @@ const userSchema = new mongoose.Schema({
   profilePicture: {
     type: String,
     default: '',
-  },  emergencyContacts: [{
-    name: String,
-    phoneNumber: String,
-  }],
+  }, 
+  //  emergencyContacts: [{
+  //   name: String,
+  //   phoneNumber: String,
+  // }],
   refreshToken: {
     type: String,
     default: '',

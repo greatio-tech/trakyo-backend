@@ -5,9 +5,9 @@ export interface IUser {
     dob?: Date;
     profilePicture?: string;
     id:number;
-    emergencyContacts?: Array<{
-      name: string;
-      phoneNumber: string;
-    }>;
+    // emergencyContacts?: Array<{
+    //   name: string;
+    //   phoneNumber: string;
+    // }>;
   }
   

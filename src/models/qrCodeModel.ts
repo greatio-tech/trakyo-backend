@@ -50,8 +50,13 @@ const qrCodeSchema = new mongoose.Schema({
     model: String,
     year: Number,
     licensePlate: String,
+    vehicleType:String,
   },
   images: [String],
+  emergencyContacts: [{
+    name: String,
+    phoneNumber: String,
+  }],
 }, { timestamps: true });
 
 const QRCode = mongoose.model('QRCode', qrCodeSchema);

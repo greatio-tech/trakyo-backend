@@ -34,7 +34,7 @@
 // };
 
 import { Request, Response, NextFunction } from 'express';
-import { getUserDetails, updateUserDetails, addEmergencyContact } from '../services/userService';
+import { getUserDetails, updateUserDetails,  } from '../services/userService';
 import ErrorHandler from '../utils/errorHandler';
 
 export const getUser = async (req: Request, res: Response, next: NextFunction) => {
@@ -71,14 +71,14 @@ export const updateUser = async (req: Request, res: Response, next: NextFunction
 //   }
 // };
 
-export const addContact = async (req: Request, res: Response, next: NextFunction) => {
-  try {
-    const userId = req.params.id;
-    // const contact = req.body;
-    const contacts = req.body.contacts; // Expecting an array of contacts
-    const user = await addEmergencyContact(userId, contacts);
-    res.json(user);
-  } catch (error) {
-    next(new ErrorHandler('Failed to add emergency contact', 400));
-  }
-};
+// export const addContact = async (req: Request, res: Response, next: NextFunction) => {
+//   try {
+//     const userId = req.params.id;
+//     // const contact = req.body;
+//     const contacts = req.body.contacts; // Expecting an array of contacts
+//     const user = await addEmergencyContact(userId, contacts);
+//     res.json(user);
+//   } catch (error) {
+//     next(new ErrorHandler('Failed to add emergency contact', 400));
+//   }
+// };

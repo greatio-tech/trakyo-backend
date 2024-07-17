@@ -8,5 +8,9 @@ export interface IQRCode {
       licensePlate: string;
     };
     images?: string[];
+    emergencyContact?: Array<{
+      name: string;
+      phoneNumber: string;
+    }>;
   }
   

@@ -52,7 +52,8 @@ export const updateQRCodeDetails = async (code: string, qrCodeDetails: Partial<I
 //   return qrCode;
 // };
 
-export const scanQRCode = async (vehicleId: string, userId: string,code:string) => {
+export const scanQRCode = async (vehicleId: string, userId: string,code:string,   emergencyContacts: Array<{ name: string, phoneNumber: string }> 
+) => {
   const vehicleDetails = await Vehicle.findOne({ _id: vehicleId }); 
   if (!vehicleDetails) {
     throw new Error('Vehicle not found');
@@ -70,6 +71,9 @@ export const scanQRCode = async (vehicleId: string, userId: string,code:string) 
 
   qrCode.vehicleDetails = vehicleDetails;
   qrCode.owner = owner._id;
+  // qrCode.emergencyContacts = emergencyContacts;
+  qrCode.emergencyContacts.push(...emergencyContacts); // Use spread operator to add all contacts at once
+
 
   await qrCode.save();
 
