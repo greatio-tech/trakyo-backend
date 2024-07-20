@@ -3,12 +3,12 @@
 openapi: 3.0.0
 docExpansion: '`none`'
 info:
-  title: PWIP - Export Costing BE API 
-  description: API for all routes from DATABASES [ MySql and Mongodb ]
+  title: Trackyo BE
+  description: API for all routes
   version: 1.0.0
   contact:
-    email: tech@pwip.co
-    url: "http://pwip.co"
+    email: "xxxxxxxxx@gmail.com"
+    url: "xxxxxxxxxx"
 servers:
   - url: http://localhost:6001/api
 
