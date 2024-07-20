@@ -30,7 +30,7 @@
     "razorpay": "^2.9.4",
     "socket.io": "^4.7.5",
     "supertest": "^7.0.0",
-    "twilio": "^5.1.0"
+    "twilio": "^5.2.2"
   },
   "devDependencies": {
     "@types/bcryptjs": "^2.4.6",
