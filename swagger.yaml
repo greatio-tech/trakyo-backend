@@ -1,0 +1,54 @@
+#http://localhost:8080/api-docs/
+
+openapi: 3.0.0
+docExpansion: '`none`'
+info:
+  title: PWIP - Export Costing BE API 
+  description: API for all routes from DATABASES [ MySql and Mongodb ]
+  version: 1.0.0
+  contact:
+    email: tech@pwip.co
+    url: "http://pwip.co"
+servers:
+  - url: http://localhost:6001/api
+
+ 
+    # description:       Optional server description, e.g. Internal staging server for testing
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      securityDefinitions:
+paths:
+  /calls/start:
+    post:
+      tags:
+        - twilio
+      summary: twilio
+      requestBody:
+        description: twilio description to make call and message
+        content:
+          application/json:
+            schema:
+                type: object
+                example: 
+                    {
+                        "from":"+91XXXXXXXXXX",
+                        "to":"+91XXXXXXXXXX",
+                      }
+      security: 
+         - BearerAuth: []  
+      responses:
+        '200':    # status code
+          description: A JSON array of content
+          content:
+            application/json:
+              schema: 
+                type: object
+                example: 
+                    {}
+        '400':
+          description: bad request    
+  
