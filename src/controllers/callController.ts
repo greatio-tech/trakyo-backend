@@ -1,8 +1,8 @@
 import { Request, Response } from 'express';
 import { initiateCall, connectCallService } from '../services/callService';
 
-const hostNameOfThisServer = process.env.HOSTNAMEOFTHISSERVER || "https://7628-103-70-197-88.ngrok-free.app"
-const twilionumber = `+13606579749`;
+const hostNameOfThisServer = process.env.HOSTNAME_OF_THIS_SERVER || "https://7628-103-70-197-88.ngrok-free.app"
+const twilionumber = process.env.TWILIO_PHONE_NUMBER  || `+13606579749`;
 
 export const startCall = async (req: Request, res: Response) => {
   const { from, to } = req.body;
