@@ -6,7 +6,7 @@ dotenv.config();
 const accountSid = process.env.TWILIO_ACCOUNT_SID;
 const authToken = process.env.TWILIO_AUTH_TOKEN;
 
-const client = twilio(accountSid, authToken);
+export const client = twilio(accountSid, authToken);
 
 export const sendOtp = (phoneNumber: string, otp: string) => {
   return client.messages.create({
@@ -23,6 +23,20 @@ export const makeCall = (from: string, to: string, url: string) => {
     to,
     from,
   });
+};
+export const connectRedirectCall = (reciever: string,twilioPhone:string) => {
+ 
+    const twiml = new twilio.twiml.VoiceResponse();
+    const dial = twiml.dial({
+      callerId:twilioPhone
+    });
+    dial.number(reciever);
+
+    return({
+      type:"text/xml",
+      send:twiml.toString()
+    })
+  
 };
 
 // export const sendSms = (phoneNumber: string, message: string) => {
