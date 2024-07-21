@@ -2,6 +2,10 @@ import mongoose from "mongoose";
 
 const addressSchema = new mongoose.Schema(
   {
+    userId: {
+      type: String,
+      required: true,
+    },
     fullName: String,
     phoneNumber: String,
     buldingNumber: String,
@@ -9,6 +13,7 @@ const addressSchema = new mongoose.Schema(
     state: String,
     pincode: String,
     city: String,
+  
   },
   { timestamps: true }
 );
