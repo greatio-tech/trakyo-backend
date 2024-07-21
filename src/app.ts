@@ -19,10 +19,22 @@ import uploadRoutes from './routes/uploadRoutes';
 import addressRoutes from './routes/addressRoutes';
 
 
+const YAML = require('yamljs')
+const swaggerui = require('swagger-ui-express')
+
+
 
 dotenv.config();
 
+
+
 const app = express();
+
+//swagger
+const swaggerDocument = YAML.load('./swagger.yaml')
+
+app.use('/api-docs',swaggerui.serve,swaggerui.setup(swaggerDocument))
+
 
 app.use(cors());
 app.use(bodyParser.json());
@@ -33,6 +45,9 @@ app.use((req, res, next) => {
   console.log(`${req.method} ${req.url}`);
   next();
 });
+
+
+
 
 app.use('/api/auth', authRoutes);
 app.use('/api/users', userRoutes);
