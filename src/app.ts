@@ -16,6 +16,7 @@ import listingRoutes from './routes/listingRoutes';
 import orderRoutes from './routes/orderRoutes';
 import callRoutes from './routes/callRoutes';
 import uploadRoutes from './routes/uploadRoutes';
+import addressRoutes from './routes/addressRoutes';
 
 
 
@@ -45,6 +46,7 @@ app.use('/api/list', listingRoutes);
 app.use('/api/orders', orderRoutes);
 app.use('/api/calls', callRoutes);
 app.use('/api/uploads', uploadRoutes);
+app.use('/api/address', addressRoutes);
 
 app.use(errorMiddleware);
 

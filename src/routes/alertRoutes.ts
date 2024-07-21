@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import { alertOwner } from '../controllers/alertController';
-import { authMiddleware } from '../middlewares/authMiddleware';
+// import { authMiddleware } from '../middlewares/authMiddleware';
 import upload from '../middlewares/uploadMiddleware';
 
 const router = Router();
