@@ -1,5 +1,7 @@
 import express from 'express';
 import bodyParser from 'body-parser';
+import YAML from 'yamljs';
+import swaggerui from 'swagger-ui-express';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import connectDB from './config/db';
@@ -18,9 +20,6 @@ import callRoutes from './routes/callRoutes';
 import uploadRoutes from './routes/uploadRoutes';
 import addressRoutes from './routes/addressRoutes';
 
-
-const YAML = require('yamljs')
-const swaggerui = require('swagger-ui-express')
 
 
 
