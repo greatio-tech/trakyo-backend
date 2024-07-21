@@ -1,9 +1,10 @@
 import { Router } from 'express';
-import { initiateAdd } from '../controllers/vehicleController';
+import { initiateAdd,initiateGet } from '../controllers/addressController';
 import { authMiddleware } from '../middlewares/authMiddleware';
 
 const router = Router();
 
 router.post('/address-add', authMiddleware, initiateAdd);
+router.get('/address-get', authMiddleware, initiateGet);
 
 export default router;
