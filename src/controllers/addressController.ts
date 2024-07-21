@@ -5,8 +5,9 @@ import ErrorHandler from '../utils/errorHandler';
 
 export const initiateAdd = async (req: Request, res: Response) => {
   try {
-    const vehicleDetails = req.body;
-    const token = await addressAdd(vehicleDetails);
+    console.log(req.body,"reqqqq");
+    const addressDetails = req.body;
+    const token = await addressAdd(addressDetails);
     res.json({ token });
   } catch (error:any) {
     res.status(500).json({ message: error.message });
