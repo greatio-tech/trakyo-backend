@@ -32,10 +32,9 @@ import { Server } from "socket.io";
 const PORT = process.env.PORT || 4000;
 
 const app = express();
-// const server = http.createServer(app);
-import ws from "ws";
-const server = require("http").createServer(app);
-const wss = new ws.Server({ server });
+const server = http.createServer(app);
+// const server = require("http").createServer(app);
+
 const io = new Server(server, {
   cors: {
     origin: "*",
@@ -72,10 +71,12 @@ io.on("connection", (socket) => {
   });
 });
 
-wss.on("connection", (ws: any) => {
-  ws.on("message", (message: any) => {
-    wss.clients.forEach((client: any) => {
-      client.send(message);
+io.on("connection", (socket: any) => {
+  io.on("message", (message: any) => {
+    Object.values(io.sockets.sockets).forEach((clientSocket: any) => {
+      if (clientSocket !== socket) {
+        clientSocket.send(message);
+      }
     });
   });
 });
