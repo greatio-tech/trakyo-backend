@@ -35,9 +35,7 @@ const swaggerDocument = YAML.load('./swagger.yaml')
 app.use('/api-docs',swaggerui.serve,swaggerui.setup(swaggerDocument))
 
 
-app.use(cors({
-  origin:"*"
-}));
+app.use(cors());
 app.use(bodyParser.json());
 
 connectDB();
@@ -63,7 +61,11 @@ app.use('/api/orders', orderRoutes);
 app.use('/api/calls', callRoutes);
 app.use('/api/uploads', uploadRoutes);
 app.use('/api/address', addressRoutes);
-app.get("/api/health",(req,res)=>res.json("sever is healthy:)"))
+// app.get("/api/health",(req,res)=>res.send("sever is healthy:)"))
+
+app.get('/api/health', function (req, res) {
+  res.send('sever is healthy:')
+})
 
 app.use(errorMiddleware);
 

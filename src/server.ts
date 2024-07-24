@@ -33,9 +33,9 @@ const PORT = process.env.PORT || 4000;
 
 const app = express();
 // const server = http.createServer(app);
-const ws = require("ws");
+import ws from "ws";
 const server = require("http").createServer(app);
-const wss = new ws.server({ server });
+const wss = new ws.Server({ server });
 const io = new Server(server, {
   cors: {
     origin: "*",
