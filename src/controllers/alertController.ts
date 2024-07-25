@@ -26,8 +26,8 @@ export const alertOwner = async (req: Request, res: Response) => {
     }
   
     try {
-      await alertHomeOwner(userId, message, imageUrl);
-      sendInAppNotification(io, userId, message, imageUrl);
+      await alertHomeOwner(userId, message);
+      sendInAppNotification( userId, message, imageUrl);
       res.status(200).json({ message: 'Alert sent successfully' });
     } catch (error:any) {
       res.status(500).json({ message: error.message });
