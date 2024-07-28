@@ -35,53 +35,60 @@
 
 // export default Order;
 
+import mongoose from "mongoose";
 
-import mongoose from 'mongoose';
+const orderSchema = new mongoose.Schema(
+  {
+    user: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+      required: true,
+    },
+    qrCodes: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "QRCode",
+        required: true,
+      },
+    ],
+    amount: {
+      type: Number,
+      required: true,
+    },
+    currency: {
+      type: String,
+      required: true,
+      default: "INR",
+    },
+    receipt: {
+      type: String,
+      required: true,
+    },
+    paymentId: {
+      type: String,
+      required: false,
+    },
+    status: {
+      type: String,
+      required: true,
+      enum: ["created", "paid", "failed"],
+      default: "created",
+    },
+    deliveryStatus: {
+      type: String,
+      required: true,
+      enum: ["pending", "processing", "shipped", "delivered"],
+      default: "pending",
+    },
+    address_id: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Address",
+      required: true,
+    },
+  },
+  { timestamps: true }
+);
 
-const orderSchema = new mongoose.Schema({
-  user: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'User',
-    required: true,
-  },
-  qrCodes: [{
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'QRCode',
-    required: true,
-  }],
-  amount: {
-    type: Number,
-    required: true,
-  },
-  currency: {
-    type: String,
-    required: true,
-    default: 'INR',
-  },
-  receipt: {
-    type: String,
-    required: true,
-  },
-  paymentId: {
-    type: String,
-    required: false,
-  },
-  status: {
-    type: String,
-    required: true,
-    enum: ['created', 'paid', 'failed'],
-    default: 'created',
-  },
-  deliveryStatus: {
-    type: String,
-    required: true,
-    enum: ['pending', 'processing', 'shipped', 'delivered'],
-    default: 'pending',
-  },
-}, { timestamps: true });
-
-const Order = mongoose.model('Order', orderSchema);
+const Order = mongoose.model("Order", orderSchema);
 
 export default Order;
-
-
