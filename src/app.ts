@@ -73,7 +73,7 @@ app.use(errorMiddleware);
 const PORT = process.env.PORT || 4000;
 
 app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
+  console.log(`app running on port ${PORT}`);
 });
 
 export default app;
