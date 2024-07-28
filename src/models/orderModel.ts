@@ -80,7 +80,7 @@ const orderSchema = new mongoose.Schema(
       enum: ["pending", "processing", "shipped", "delivered"],
       default: "pending",
     },
-    address_id: [{ type: mongoose.Schema.Types.ObjectId, ref: "Address" }],
+    address_id: { type: mongoose.Schema.Types.ObjectId, ref: "Address" },
   },
   { timestamps: true }
 );
