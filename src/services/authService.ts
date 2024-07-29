@@ -12,7 +12,7 @@ export const generateOtp = () => {
 
 export const loginWithOtp = async (phoneNumber: string) => {
   const otp = generateOtp();
-  console.log(otp);
+  console.log(otp,"otp");
   
 //   await sendOtp(phoneNumber, otp);
   const token = jwt.sign({ phoneNumber, otp }, process.env.JWT_SECRET!, { expiresIn: '10m' });

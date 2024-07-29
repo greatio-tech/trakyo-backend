@@ -16,5 +16,6 @@ export interface IOrder {
   paymentId?: string;
   status: string;
   deliveryStatus: string;
+  address_id:string;
 }
 
