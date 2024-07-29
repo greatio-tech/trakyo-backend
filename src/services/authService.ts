@@ -14,7 +14,7 @@ export const loginWithOtp = async (phoneNumber: string) => {
   const otp = generateOtp();
   console.log(otp,"otp");
   
-//   await sendOtp(phoneNumber, otp);
+  await sendOtp(phoneNumber, otp);
   const token = jwt.sign({ phoneNumber, otp }, process.env.JWT_SECRET!, { expiresIn: '10m' });
   return token;
   //chec
@@ -69,7 +69,7 @@ export const verifyOtp = async (phoneNumber: string, otp: string, token: string)
 export const resendOtp = async (phoneNumber: string) => {
   const otp = generateOtp();
   console.log(otp);
-  // await sendOtp(phoneNumber, otp);
+  await sendOtp(phoneNumber, otp);
   const token = jwt.sign({ phoneNumber, otp }, process.env.JWT_SECRET!, { expiresIn: '10m' });
   return token;
 };

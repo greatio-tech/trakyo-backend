@@ -66,7 +66,7 @@ import express from "express";
 import http from "http";
 import { Server } from "socket.io";
 
-const PORT =  8000;
+const PORT =  process.env.SOCKET_PORT || 8000;
 
 const app = express();
 const server = http.createServer(app);
