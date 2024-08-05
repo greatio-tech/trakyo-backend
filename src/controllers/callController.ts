@@ -18,12 +18,12 @@ const twilionumber = process.env.TWILIO_PHONE_NUMBER || `+13606579749`;
 
 
 
-const exotelNumbers = ["04954265711"]; //|| process.env.EXO_PHONE_NUMBERS?.split(',');
+
 export const startCall = async (req: Request, res: Response ,next:any) => {
   const { fromNumber, fromCountryCode = "+91", qrCode } = req.body;
-
+  const exotelNumbers = process.env.EXO_PHONE_NUMBERS?.split(',')||[];
   try {
-
+    if (exotelNumbers.length==0) throw "Exo-phone not available !!!"
     if (!fromNumber || !fromCountryCode || !qrCode)
       throw "Mandatory fields in request body should be filled .";
 
@@ -75,6 +75,8 @@ export const startCall = async (req: Request, res: Response ,next:any) => {
         return redirectObject.virtualNumber;
       }
     );
+
+
     const availableVirtualNumbers = exotelNumbers.filter(
       (exophone) => !arrOfUsedVitualNumbers.includes(exophone)
     );
