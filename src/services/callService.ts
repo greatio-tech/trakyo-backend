@@ -52,7 +52,6 @@ export const addCallLogEntry = async (caller:any,reciever:any,virtualNumber:stri
 export const updateCallLogEntry = async (caller?:any,reciever?:any,virtualNumber?:string,searchStatus?:string,moreInfo?:any) => {
   const now = new Date();
   const fifteenMinutesAgo = new Date(now.getTime() - 15 * 60 * 1000);
-  console.log(caller,virtualNumber)
   let status = moreInfo?.CallStatus
   let x = await callLogsModel.findOneAndUpdate({
     'caller.number':caller.number,

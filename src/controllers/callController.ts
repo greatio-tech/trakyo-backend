@@ -149,9 +149,9 @@ export const incomingCall = async (req: Request, res: Response,next:any) => {
       "generatedCall",
       queryContent
     );
-    return;
-    res.type("text/plain").send(recieverNumber);
     console.log("called from " + callFrom + " to " + recieverNumber);
+    res.type("text/plain").send(recieverNumber);
+    return;
   } catch (error: any) {
     next( new Error(error))
   }
