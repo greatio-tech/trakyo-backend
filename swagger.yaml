@@ -10,7 +10,7 @@ info:
     email: "xxxxxxxxx@gmail.com"
     url: "xxxxxxxxxx"
 servers:
-  - url: http://localhost:6000/api 
+  - url: http://localhost:6001/api 
 
  
     # description:       Optional server description, e.g. Internal staging server for testing
@@ -25,18 +25,19 @@ paths:
   /calls/start:
     post:
       tags:
-        - twilio
-      summary: twilio
+        - exotel
+      summary: Generate exotel number to connect QR owner .
       requestBody:
-        description: twilio description to make call and message
+        description: exotel description 
         content:
           application/json:
             schema:
                 type: object
                 example: 
                     {
-                        "from":"+91XXXXXXXXXX",
-                        "to":"+91XXXXXXXXXX",
+                        "fromNumber": 81XXXXXXXX,
+                        "fromCountryCode": "+91",
+                        "qrCode": "QR17212188301530",
                       }
       security: 
          - BearerAuth: []  
@@ -48,7 +49,10 @@ paths:
               schema: 
                 type: object
                 example: 
-                    {}
+                    {
+                        "virtualNumber": "04954265711",
+                        "callLogId": "66b0f2f846ace1e87343856b",
+                    }
         '400':
           description: bad request    
   

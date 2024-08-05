@@ -99,7 +99,7 @@ export const startCall = async (req: Request, res: Response ,next:any) => {
     );
 
     //create a record in call Logs :
-    await addCallLogEntry(
+    const callLogResponse = await addCallLogEntry(
       call.caller,
       call.receiver,
       call.virtualNumber,
@@ -107,7 +107,10 @@ export const startCall = async (req: Request, res: Response ,next:any) => {
       null
     );
 
-    res.json(call);
+    res.json({
+      virtualNumber:call.virtualNumber,
+      callLogId:callLogResponse._id
+    });
   } catch (error: any) {
     next( new Error(error))
     // res.status(500).json({ message: error.message || error });
