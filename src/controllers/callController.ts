@@ -1,4 +1,4 @@
-import { Request, Response } from "express";
+import { Request, Response  } from "express";
 import {
   addCallLogEntry,
   connectCallService,
@@ -15,25 +15,18 @@ const hostNameOfThisServer =
   "https://7628-103-70-197-88.ngrok-free.app";
 const twilionumber = process.env.TWILIO_PHONE_NUMBER || `+13606579749`;
 
-// const connectReciever: any = {
-//   "08111957466": "+919746716060",
-//   "09446588245": "+918943664724",
-// };
+
+
+
 const exotelNumbers = ["04954265711"]; //|| process.env.EXO_PHONE_NUMBERS?.split(',');
-export const startCall = async (req: Request, res: Response) => {
+export const startCall = async (req: Request, res: Response ,next:any) => {
   const { fromNumber, fromCountryCode = "+91", qrCode } = req.body;
 
   try {
-    // const url = `${hostNameOfThisServer}/api/calls/connect?reciever=${encodeURIComponent(
-    //   to
-    //   )}`
-    // const call = await initiateCall(twilionumber, from, url);
-    // res.json(call);
 
     if (!fromNumber || !fromCountryCode || !qrCode)
       throw "Mandatory fields in request body should be filled .";
 
-    console.log(typeof qrCode)
 
     const QR_ownerDetails: any = await QRCodeModel.aggregate([
       {
@@ -116,10 +109,11 @@ export const startCall = async (req: Request, res: Response) => {
 
     res.json(call);
   } catch (error: any) {
-    res.status(500).json({ message: error.message || error });
+    next( new Error(error))
+    // res.status(500).json({ message: error.message || error });
   }
 };
-export const incomingCall = async (req: Request, res: Response) => {
+export const incomingCall = async (req: Request, res: Response,next:any) => {
   let callFrom = String(req.query.CallFrom);
   const exoPhoneForThisSession = String(req.query.CallTo);
 
@@ -156,11 +150,13 @@ export const incomingCall = async (req: Request, res: Response) => {
     res.type("text/plain").send(recieverNumber);
     console.log("called from " + callFrom + " to " + recieverNumber);
   } catch (error: any) {
-    console.log(error);
-    res.status(500).json({ message: error.message });
+    next( new Error(error))
   }
 };
 
+
+
+//twilio api
 export const connectCall = async (req: Request, res: Response) => {
   const reciever = String(req.query.reciever) || null;
   console.log("this is connecting call");
