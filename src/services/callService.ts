@@ -1,4 +1,5 @@
 import { makeCall,connectRedirectCall } from '../config/twilio';
+import callLogsModel from '../models/callLogsModel';
 import TemporaryCallRedirectModel from '../models/TempCallRedirectsModel';
 
 
@@ -32,4 +33,36 @@ export const saveRelationCallerReciever = async (fromNumber: string,fromCountryC
   });
   await recordToSave.save();
   return recordToSave;
+};
+
+
+// call logs
+
+export const addCallLogEntry = async (caller:any,reciever:any,virtualNumber:string,status:string,moreInfo?:any) => {
+  const recordToSave = new callLogsModel({
+    caller,
+    reciever,
+    virtualNumber,
+    status,
+    moreInfo
+  });
+  await recordToSave.save();
+  return recordToSave;
+};
+export const updateCallLogEntry = async (caller?:any,reciever?:any,virtualNumber?:string,searchStatus?:string,moreInfo?:any) => {
+  const now = new Date();
+  const fifteenMinutesAgo = new Date(now.getTime() - 15 * 60 * 1000);
+  console.log(caller,virtualNumber)
+  let status = moreInfo?.CallStatus
+  let x = await callLogsModel.findOneAndUpdate({
+    'caller.number':caller.number,
+    virtualNumber:virtualNumber,
+    status:searchStatus,
+    createdAt: { $lte: fifteenMinutesAgo }
+  },{
+    status,
+    moreInfo
+
+  })
+  return x;
 };
