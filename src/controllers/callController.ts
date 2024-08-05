@@ -156,15 +156,11 @@ export const incomingCall = async (req: Request, res: Response,next:any) => {
     next( new Error(error))
   }
 };
-
-
-
-//twilio api
 export const connectCall = async (req: Request, res: Response , next:any) => {
 
   try {
-   const queryContent = (req.query)
-   console.log("queryContent",queryContent)
+   var queryContent = (req.query)
+   delete queryContent.Legs
    const callLogObject =  await callLogsModel.findOneAndUpdate({'moreInfo.CallSid':queryContent.CallSid},{moreInfo:queryContent,status:queryContent.DialCallStatus})
    console.log("call log updated for  _callLogId : ",callLogObject?._id)
    res.status(200).json({
