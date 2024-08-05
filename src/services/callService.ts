@@ -26,7 +26,7 @@ export const saveRelationCallerReciever = async (fromNumber: string,fromCountryC
     countryCode:fromCountryCode,
     number:fromNumber
    },
-   receiver:{
+   reciever:{
     countryCode:toCountryCode,
     number:toNumber
    }
@@ -39,11 +39,12 @@ export const saveRelationCallerReciever = async (fromNumber: string,fromCountryC
 // call logs
 
 export const addCallLogEntry = async (caller:any,reciever:any,virtualNumber:string,status:string,moreInfo?:any) => {
+  let newStatus = moreInfo?.CallStatus
   const recordToSave = new callLogsModel({
     caller,
     reciever,
     virtualNumber,
-    status,
+    status:newStatus||status,
     moreInfo
   });
   await recordToSave.save();
@@ -61,7 +62,12 @@ export const updateCallLogEntry = async (caller?:any,reciever?:any,virtualNumber
   },{
     status,
     moreInfo
-
   })
+  console.log("update call log")
+  return x;
+};
+export const updateCallLogAfterCallPassthru = async (queryContent :any) => {
+
+  let x = await callLogsModel.find()
   return x;
 };

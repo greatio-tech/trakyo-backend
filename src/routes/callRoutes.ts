@@ -7,7 +7,7 @@ const router = Router();
 router.post('/start', startCall);
 router.get('/incoming',incomingCall );
 
-router.post('/connect',connectCall );
+router.get('/connect/call-log',connectCall );
 // router.post('/start', authMiddleware, startCall);
 
 

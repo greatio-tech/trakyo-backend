@@ -7,7 +7,7 @@ interface INumberSchema {
 
 interface ICallLogs extends Document {
   caller: INumberSchema;
-  receiver: INumberSchema;
+  reciever: INumberSchema;
   virtualNumber: string;
   status: string;
   createdAt: Date;
@@ -20,7 +20,7 @@ const numberSubSchema = new mongoose.Schema<INumberSchema>({
 });
 const callLogsSchema = new mongoose.Schema<ICallLogs>({
   caller: numberSubSchema,
-  receiver: numberSubSchema,
+  reciever: numberSubSchema,
   virtualNumber: { type: String, required: true },
   status: {type:String},
   moreInfo: { type: Map, of: String }

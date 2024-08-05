@@ -61,7 +61,7 @@ export const startCall = async (req: Request, res: Response ,next:any) => {
 
     const alreadyExistingForSameReciever = await TemporaryCallRedirect.findOne({
       "caller.number": `${fromNumber}`,
-      "receiver.number": `${toNumber}`,
+      "reciever.number": `${toNumber}`,
     }).sort({ createdAt: 1 });
     if (alreadyExistingForSameReciever)
       throw "Already existing in records of call redirect collection.";
@@ -99,17 +99,16 @@ export const startCall = async (req: Request, res: Response ,next:any) => {
     );
 
     //create a record in call Logs :
-    const callLogResponse = await addCallLogEntry(
-      call.caller,
-      call.receiver,
-      call.virtualNumber,
-      "generatedCall",
-      null
-    );
+    // const callLogResponse = await addCallLogEntry(
+    //   call.caller,
+    //   call.reciever,
+    //   call.virtualNumber,
+    //   "generatedCall",
+    //   null
+    // );
 
     res.json({
-      virtualNumber:call.virtualNumber,
-      callLogId:callLogResponse._id
+      virtualNumber:call.virtualNumber
     });
   } catch (error: any) {
     next( new Error(error))
@@ -138,15 +137,22 @@ export const incomingCall = async (req: Request, res: Response,next:any) => {
       throw "This caller have No Entry in callRedirectCollection .";
 
     const recieverNumber =
-      String(callRedirectRecord?.receiver?.countryCode) +
-      String(callRedirectRecord?.receiver?.number);
+      String(callRedirectRecord?.reciever?.countryCode) +
+      String(callRedirectRecord?.reciever?.number);
 
     //update call log in DB
-    const x = await updateCallLogEntry(
-      callRedirectRecord?.caller,
-      callRedirectRecord?.receiver,
-      callRedirectRecord?.virtualNumber,
-      "generatedCall",
+    // const x = await updateCallLogEntry(
+    //   callRedirectRecord?.caller,
+    //   callRedirectRecord?.reciever,
+    //   callRedirectRecord?.virtualNumber,
+    //   "generatedCall",
+    //   queryContent
+    // );
+      const callLogResponse = await addCallLogEntry(
+      callRedirectRecord.caller,
+      callRedirectRecord.reciever,
+      callRedirectRecord.virtualNumber,
+      "initiated-call",
       queryContent
     );
     console.log("called from " + callFrom + " to " + recieverNumber);
@@ -160,21 +166,19 @@ export const incomingCall = async (req: Request, res: Response,next:any) => {
 
 
 //twilio api
-export const connectCall = async (req: Request, res: Response) => {
-  const reciever = String(req.query.reciever) || null;
-  console.log("this is connecting call");
+export const connectCall = async (req: Request, res: Response , next:any) => {
+
   try {
-    // const url = `${hostNameOfThisServer}/connect?reciever=${encodeURIComponent(
-    //   to
-    //   )}`
-    if (!reciever) {
-      throw `error : reciever number not provided`;
-    }
-    const call = await connectCallService(twilionumber, reciever);
-    res.type(call.type);
-    res.send(call.send);
+   const queryContent = (req.query)
+   console.log("queryContent",queryContent)
+   const callLogObject =  await callLogsModel.findOneAndUpdate({'moreInfo.CallSid':queryContent.CallSid},{moreInfo:queryContent,status:queryContent.DialCallStatus})
+   console.log("call log updated for  _callLogId : ",callLogObject?._id)
+   res.status(200).json({
+    message:"call log updated Successfully.",
+
+   })
   } catch (error: any) {
-    console.log(error);
-    res.status(500).json({ message: error.message });
+    next( new Error(error))
+
   }
 };
